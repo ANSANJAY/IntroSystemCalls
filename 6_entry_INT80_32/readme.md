@@ -12,6 +12,42 @@
     2. Enables local interrupts.
     3. Invokes `do_syscall_32_irqs_on()` which fetches the relevant system call handler from the syscall table based on the system call number (from `eax` or `regs->ax`) and then executes the handler with the provided arguments.
 
+
+
+Arguments:
+```bash
+ eax  system call number
+ ebx  arg1
+ ecx  arg2
+ edx  arg3
+ esi  arg4
+ edi  arg5
+ ebp  arg6
+```
+
+stores the values of the registers on the stack
+call do_int80_syscall_32
+registers are restored
+call iret               //#define INTERRUPT_RETURN iret
+
+```C
+ void do_int80_syscall_32(struct pt_regs *regs)
+{
+        enter_from_user_mode();
+        local_irq_enable();
+        do_syscall_32_irqs_on(regs);
+}
+```
+Activates the interrupt
+Calls another function which gets a function from syscall table and calls it with syscall arguments.
+```C
+                regs->ax = ia32_sys_call_table[nr](
+                        (unsigned int)regs->bx, (unsigned int)regs->cx,
+                        (unsigned int)regs->dx, (unsigned int)regs->si,
+                        (unsigned int)regs->di, (unsigned int)regs->bp);
+```
+
+
 - **Curious Questions**:
   - **What's the significance of the interrupt enabling (`local_irq_enable()`) within the system call handler?**
     - Enabling interrupts ensures that the processor can handle other important tasks or events while the system call is being serviced. It's essential for maintaining system responsiveness.
