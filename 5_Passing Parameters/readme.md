@@ -2,7 +2,12 @@
 - **Explain the technical concept**:
   - System calls, similar to regular function calls, can require parameters to operate. However, the way they handle parameters is distinct.
   - In typical function calls in C, arguments are pushed onto the stack. But when making a system call, you're transitioning from user space to kernel space. Directly passing parameters using the user space stack to the kernel can be unsafe.
-  - Instead of using the stack, system calls utilize CPU registers to pass parameters. Before a system call is triggered, the necessary parameters are loaded into specific registers. Post the system call instruction, the kernel fetches these parameters from the registers and places them on its stack, allowing the system call service routine to access them.
+  - Instead of using the stack, system calls utilize CPU registers to pass parameters. 
+  
+  ## Before a system call is triggered, 
+  - the **necessary parameters are loaded into specific registers.**
+  ## Post the system call instruction, 
+  - the kernel fetches these parameters from the registers and places them on its stack, allowing the system call service routine to access them.
   - This approach varies across architectures. For instance:
     - **x86**: 
       - Syscall number: `%eax`
