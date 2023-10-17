@@ -19,6 +19,13 @@
   - **Why is the System Call Table architecture-specific?**
     - Different architectures can have variations in their instruction sets, hardware capabilities, and conventions. Thus, the system calls (and their numbers) may differ or be implemented differently across architectures.
 
+## Location of System Call Table
+------------------------------
+
+For x86: arch/x86/entry/syscalls/syscall_32.tbl
+x86_64:  arch/x86/entry/syscalls/syscall_64.tbl
+arm:	 arch/arm/tools/syscall.tbl
+
 - **Explain the concept in simple words**:
   - Picture the System Call Table as a telephone directory 📖☎️. When you want to call someone (make a system call), you don't dial their name; you look up their unique phone number (system call number) and dial that. The phone system (kernel) then connects your call based on this number. Just as different countries might have different phone directories, different computer architectures have different System Call Tables.
 
