@@ -39,7 +39,7 @@ call iret               //#define INTERRUPT_RETURN iret
 }
 ```
 Activates the interrupt
-Calls another function which gets a function from syscall table and calls it with syscall arguments.
+Calls another function which gets a function from **syscall table** and calls it with syscall arguments.
 ```C
                 regs->ax = ia32_sys_call_table[nr](
                         (unsigned int)regs->bx, (unsigned int)regs->cx,
