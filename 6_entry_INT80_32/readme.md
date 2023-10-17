@@ -1,6 +1,7 @@
 **entry_INT80_32**
 - **Explain the technical concept**:
-  - `entry_INT80_32` is a crucial part of the x86 architecture's system call mechanism. When a program wishes to make a system call, it loads the appropriate registers with the syscall number and arguments and triggers an interrupt via the `int $0x80` instruction.
+  - `entry_INT80_32` is a crucial part of the x86 architecture's system call mechanism. 
+  When a program wishes to make a system call, it loads the appropriate registers with the syscall number and arguments and triggers an interrupt via the `int $0x80` instruction.
   - On receiving this interrupt, the `entry_INT80_32` routine is activated. This routine:
     1. Stores the values of the registers on its stack.
     2. Calls the `do_int80_syscall_32()` function.
